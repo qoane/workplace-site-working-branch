@@ -83,10 +83,20 @@ nav .container{display:flex;align-items:center;justify-content:space-between;pad
 
 /* Set each slide image via: style="--bg:url('images/xxx.png')" */
 .home .hero-slide{
+  position:relative;
   background-image:var(--bg);
   background-size:cover !important;
   background-position:center center !important;
   background-repeat:no-repeat !important;
+}
+
+.home .hero-slide .hero-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-1;
 }
 
 /* Global navy wash for readability */
