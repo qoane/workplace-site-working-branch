@@ -94,13 +94,18 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // 2) Init Swiper
+    const sliderDelay = parseInt(heroEl.dataset.autoplayDelay, 10);
+    const sliderSpeed = parseInt(heroEl.dataset.transitionSpeed, 10);
+    const autoplayDelay = Number.isFinite(sliderDelay) ? sliderDelay : 6000;
+    const transitionSpeed = Number.isFinite(sliderSpeed) ? sliderSpeed : 1200;
+
     const heroSwiper = new Swiper(heroEl, {
       effect: 'fade',
       fadeEffect: { crossFade: true },
       loop: true,
-      speed: 900,
+      speed: transitionSpeed,
       autoplay: {
-        delay: 4500,
+        delay: autoplayDelay,
         disableOnInteraction: false,
         pauseOnMouseEnter: false // keep playing even when hovered
       },
