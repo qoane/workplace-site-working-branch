@@ -237,6 +237,9 @@ nav .container{display:flex;align-items:center;justify-content:space-between;pad
 .contact-info i{margin-right:8px;color:var(--secondary-color)}
 .social-links a{display:inline-block;margin-right:12px;color:var(--primary-color);font-size:1.1rem;transition:color .3s}
 .social-links a:hover{color:var(--secondary-color)}
+.grid-two{display:grid;gap:32px}
+@media(min-width:768px){.grid-two{grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}}
+.contact-page .contact-info,.contact-page .contact-form{background:#fff;padding:30px;border-radius:16px;box-shadow:0 24px 50px rgba(15,23,42,.08)}
 
 /* Footer */
 footer{background:var(--primary-color);color:#fff;padding:60px 0 30px;font-size:.9rem}
