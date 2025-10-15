@@ -8,8 +8,6 @@ $errors = [];
 $message = '';
 
 try {
-    $pdo->beginTransaction();
-
     $pdo->exec('CREATE TABLE IF NOT EXISTS users (
         id INT AUTO_INCREMENT PRIMARY KEY,
         username VARCHAR(100) NOT NULL UNIQUE,
@@ -40,6 +38,8 @@ try {
         updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
         INDEX idx_parent_slug (parent_slug)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4');
+
+    $pdo->beginTransaction();
 
     $adminExists = $pdo->query("SELECT COUNT(*) FROM users WHERE username = 'admin'")->fetchColumn();
     if (!$adminExists) {
@@ -93,7 +93,9 @@ try {
         ]);
     }
 
-    $pdo->commit();
+    if ($pdo->inTransaction()) {
+        $pdo->commit();
+    }
 
     if (!is_dir(__DIR__ . '/storage')) {
         mkdir(__DIR__ . '/storage', 0775, true);
