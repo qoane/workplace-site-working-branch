@@ -10,7 +10,7 @@ require_admin();
   <title>Admin &mdash; Workplace Solutions</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-oBWdlEYUoMRn8DcRbTy9VnE3NQIdlZwIYdMb9RfMge+leP4YDbi0wzfopWn7UXQ8sGdzAFhlqmcuP5HTh3YtKQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="<?= base_url('admin/css/admin.css') ?>" />
-  <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/super-build/ckeditor.js" referrerpolicy="origin"></script>
   <script src="<?= base_url('admin/js/admin.js') ?>" defer></script>
 </head>
 <body>
