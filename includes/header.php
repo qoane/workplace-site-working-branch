@@ -16,12 +16,12 @@ $bodyClass = $bodyClass ?? '';
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-oBWdlEYUoMRn8DcRbTy9VnE3NQIdlZwIYdMb9RfMge+leP4YDbi0wzfopWn7UXQ8sGdzAFhlqmcuP5HTh3YtKQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="<?= base_url('css/style.css') ?>" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
-  <script src="js/option6.js" defer></script>
+  <script src="<?= base_url('js/option6.js') ?>" defer></script>
 </head>
 <body class="<?= htmlspecialchars($bodyClass) ?>">
   <div id="preloader"><div class="spinner"></div></div>
@@ -44,7 +44,7 @@ $bodyClass = $bodyClass ?? '';
 
   <nav class="navbar">
     <div class="container">
-      <a href="<?= base_url('index.php') ?>" class="logo"><img src="images/logo.png" alt="Workplace Solutions logo" /></a>
+      <a href="<?= base_url('index.php') ?>" class="logo"><img src="<?= base_url('images/logo.png') ?>" alt="Workplace Solutions logo" /></a>
       <button class="nav-toggle" id="navToggle">
         <span></span><span></span><span></span>
       </button>

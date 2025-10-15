@@ -24,10 +24,68 @@ if (!function_exists('db')) {
     }
 }
 
+function detect_base_path(): string
+{
+    $rootDir = realpath(__DIR__ . '/..');
+    if ($rootDir === false) {
+        return '';
+    }
+
+    $rootDir = str_replace('\\', '/', rtrim($rootDir, '/'));
+
+    $documentRoot = $_SERVER['DOCUMENT_ROOT'] ?? '';
+    if ($documentRoot !== '') {
+        $documentRoot = str_replace('\\', '/', rtrim($documentRoot, '/'));
+        if (strpos($rootDir, $documentRoot) === 0) {
+            $relative = substr($rootDir, strlen($documentRoot));
+            return rtrim($relative, '/');
+        }
+    }
+
+    $scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+    $scriptFilename = $_SERVER['SCRIPT_FILENAME'] ?? '';
+    if ($scriptName !== '' && $scriptFilename !== '') {
+        $scriptName = str_replace('\\', '/', $scriptName);
+        $scriptFilename = str_replace('\\', '/', $scriptFilename);
+
+        if (strpos($scriptFilename, $rootDir) === 0) {
+            $relativePath = substr($scriptFilename, strlen($rootDir));
+            $relativePath = '/' . ltrim(str_replace('\\', '/', $relativePath), '/');
+
+            if ($relativePath !== '/' && $relativePath !== '') {
+                if (substr($scriptName, -strlen($relativePath)) === $relativePath) {
+                    $base = substr($scriptName, 0, -strlen($relativePath));
+                    return rtrim($base, '/');
+                }
+            } else {
+                return rtrim(dirname($scriptName), '/');
+            }
+        }
+    }
+
+    return '';
+}
+
 function base_url(string $path = ''): string
 {
-    $base = rtrim(app_config()['app']['base_url'] ?? '', '/');
-    return $base . '/' . ltrim($path, '/');
+    static $base;
+
+    if ($base === null) {
+        $configured = trim(app_config()['app']['base_url'] ?? '');
+        if ($configured !== '') {
+            $base = rtrim($configured, '/');
+        } else {
+            $base = detect_base_path();
+        }
+    }
+
+    $path = ltrim($path, '/');
+
+    if ($path === '') {
+        return $base === '' ? '/' : $base . '/';
+    }
+
+    return ($base === '' ? '/' : $base . '/') . $path;
 }
 
 function get_home_page(): ?array
